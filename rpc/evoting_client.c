@@ -1,20 +1,3 @@
-/*
- * evoting_client.c
- *
- * Fat client for the Electronic Voting System.
- * Contains all user-facing prompts, menus, and hand-rolled stub
- * functions that communicate with the server over a plain TCP socket
- * using the text protocol defined in evoting_common.h.
- *
- * No rpcgen-generated files are used.
- *
- * Build:
- *   gcc -Wall -o evoting_client evoting_client.c
- *
- * Usage:
- *   ./evoting_client <server_host>
- */
-
 #include "evoting_common.h"
 #include "client_stub.h"
 
@@ -94,9 +77,6 @@ int main(int argc, char *argv[])
     }
 }
 
-/* -----------------------------------------------------------------------
- * menu
- * --------------------------------------------------------------------- */
 static void menu(void)
 {
     printf("\nElectronic Voting System\n");
@@ -106,9 +86,6 @@ static void menu(void)
     printf("4. Exit\n");
 }
 
-/* -----------------------------------------------------------------------
- * ensureAdminExists
- * --------------------------------------------------------------------- */
 static void ensureAdminExists(void)
 {
     int exists = stub_admin_exists();
@@ -148,9 +125,6 @@ static void ensureAdminExists(void)
     }
 }
 
-/* -----------------------------------------------------------------------
- * adminPanel
- * --------------------------------------------------------------------- */
 static void adminPanel(void)
 {
     char regnobuf[MAX_REGNO];
@@ -199,9 +173,6 @@ static void adminPanel(void)
     }
 }
 
-/* -----------------------------------------------------------------------
- * managePositions
- * --------------------------------------------------------------------- */
 static void managePositions(void)
 {
     char position[MAX_POSITION];
@@ -227,9 +198,6 @@ static void managePositions(void)
     printf("Positions updated.\n");
 }
 
-/* -----------------------------------------------------------------------
- * registerVoter
- * --------------------------------------------------------------------- */
 static void registerVoter(void)
 {
     voter_t v;
@@ -263,9 +231,6 @@ static void registerVoter(void)
     getchar();
 }
 
-/* -----------------------------------------------------------------------
- * registerContestant
- * --------------------------------------------------------------------- */
 static void registerContestant(void)
 {
     char positions[MAX_RECORDS][MAX_POSITION];
@@ -323,15 +288,13 @@ static void registerContestant(void)
     getchar();
 }
 
-/* -----------------------------------------------------------------------
- * castVote
- *
+/* 
  * 1. Verify voter credentials (server returns 0/1/2).
  * 2. Fetch positions and contestants from server.
  * 3. For each position display candidates and collect choice locally.
  * 4. Build pipe-delimited choices string; empty slot = skip.
  * 5. Submit ballot to server.
- * --------------------------------------------------------------------- */
+*/
 static void castVote(void)
 {
     char regnobuf[MAX_REGNO];
@@ -404,7 +367,6 @@ static void castVote(void)
             printf("No contestants available for this position.\n");
             printf("Press Enter to continue to the next position...");
             getchar();
-            /* slot stays empty */
         } else {
             for (k = 0; k < candidateCount; k++) {
                 int idx = candidateIdx[k];
@@ -424,9 +386,7 @@ static void castVote(void)
                         sizeof(choicesBuf) - strlen(choicesBuf) - 1);
             } else if (choice != 0) {
                 printf("Invalid choice for this position. Skipping.\n");
-                /* slot stays empty */
             }
-            /* 0 = intentional skip */
         }
     }
 
@@ -438,9 +398,6 @@ static void castVote(void)
     printf("Vote cast successfully!\n");
 }
 
-/* -----------------------------------------------------------------------
- * tallyVotes
- * --------------------------------------------------------------------- */
 static void tallyVotes(void)
 {
     printf("\n--- Election Results ---\n");

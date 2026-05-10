@@ -5,11 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* -----------------------------------------------------------------------
- * PROTOTYPES FOR HANDLER FUNCTIONS
- * These correspond to the "procs" called by the server main loop.
- * --------------------------------------------------------------------- */
-
 /** proc 1: Check if an admin record exists */
 void handle_admin_exists(int cfd);
 

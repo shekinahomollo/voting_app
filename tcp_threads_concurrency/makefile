@@ -13,7 +13,7 @@ client:
 # Deletes the client and server executables. Use when recompiling to get fresh executables
 # make clean
 clean:
-	rm -f client server
+	rm -f client server *.txt
 
 # Performs the whole process of cleaning and compilation of files and clears the terminal
 # make whole

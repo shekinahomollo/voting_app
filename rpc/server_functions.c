@@ -1,18 +1,10 @@
 #include "evoting_common.h"
 
-/* -----------------------------------------------------------------------
- * File names used for persistent storage
- * --------------------------------------------------------------------- */
+// File names used for persistent storage
 #define FILE_ADMIN       "admin.txt"
 #define FILE_VOTERS      "voters.txt"
 #define FILE_CONTESTANTS "contestants.txt"
 #define FILE_POSITIONS   "positions.txt"
-
-/* =======================================================================
- * HANDLER IMPLEMENTATIONS
- * Each handler reads its arguments from the pre-split args string,
- * performs the operation, and writes a response back to cfd.
- * ===================================================================== */
 
 /* -----------------------------------------------------------------------
  * handle_admin_exists  (proc 1)

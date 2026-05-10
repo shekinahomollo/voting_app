@@ -1,26 +1,6 @@
-/*
- * evoting_server.c
- *
- * Server for the Electronic Voting System.
- * Listens on EVOTING_PORT (TCP), accepts one client at a time, reads
- * request lines, dispatches to the appropriate handler, and writes
- * response lines back.
- *
- * No rpcgen-generated files are used.
- *
- * Build:
- *   gcc -Wall -o evoting_server evoting_server.c
- *
- * Usage:
- *   ./evoting_server
- */
-
 #include "evoting_common.h"
 #include "server_stub.h"
 
-/* =======================================================================
- * main – set up listening socket, accept clients, dispatch requests
- * ===================================================================== */
 int main(void)
 {
     int listenfd, connfd;
@@ -54,7 +34,7 @@ int main(void)
 
         printf("Client connected: %s\n", inet_ntoa(cli_addr.sin_addr));
 
-        /* Serve this client until it disconnects */
+        /* Serve client until it disconnects */
         while (1) {
             char line[MAX_LINE];
             int n = recv_line(connfd, line, sizeof(line));

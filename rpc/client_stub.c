@@ -1,16 +1,11 @@
-/* =======================================================================
- * HAND-ROLLED STUB FUNCTIONS
- *
- * Each stub mirrors a remote procedure:
+/* Each stub mirrors a remote procedure:
  *   1. Formats a request line and sends it with send_line().
  *   2. Reads the response line(s) with recv_line().
  *   3. Parses the plain text and returns the result.
- * ===================================================================== */
+ */
 
-/* -----------------------------------------------------------------------
- * stub_admin_exists
- * Returns 1 if an admin record exists on the server, 0 if not, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 if an admin record exists on the server, 0 if not, -1 on error.
+*/
 
 #include "client_stub.h"
 
@@ -22,10 +17,8 @@ int stub_admin_exists(void)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_create_admin
- * Returns 1 on success, 0 on failure, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 on success, 0 on failure, -1 on error.
+*/
 int stub_create_admin(const admin_t *a)
 {
     char msg[MAX_MSG];
@@ -36,10 +29,8 @@ int stub_create_admin(const admin_t *a)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_verify_admin
- * Returns 1 if credentials match, 0 otherwise, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 if credentials match, 0 otherwise, -1 on error.
+*/
 int stub_verify_admin(const char *regNo, const char *password)
 {
     char msg[MAX_MSG];
@@ -50,10 +41,8 @@ int stub_verify_admin(const char *regNo, const char *password)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_add_position
- * Returns 1 on success, 0 on failure, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 on success, 0 on failure, -1 on error.
+*/
 int stub_add_position(const char *position)
 {
     char msg[MAX_MSG];
@@ -64,10 +53,8 @@ int stub_add_position(const char *position)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_register_voter
- * Returns 1 on success, 0 on failure, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 on success, 0 on failure, -1 on error.
+*/
 int stub_register_voter(const voter_t *v)
 {
     char msg[MAX_MSG];
@@ -78,10 +65,8 @@ int stub_register_voter(const voter_t *v)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_register_contestant
- * Returns 1 on success, 0 on failure, -1 on error.
- * --------------------------------------------------------------------- */
+/* Returns 1 on success, 0 on failure, -1 on error.
+*/
 int stub_register_contestant(const contestant_t *c)
 {
     char msg[MAX_MSG];
@@ -92,11 +77,9 @@ int stub_register_contestant(const contestant_t *c)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_get_positions
- * Fills positions[][MAX_POSITION] with names returned by the server.
+/* Fills positions[][MAX_POSITION] with names returned by the server.
  * Returns the number of positions read, or -1 on error.
- * --------------------------------------------------------------------- */
+*/
 int stub_get_positions(char positions[][MAX_POSITION], int maxPos)
 {
     char buf[MAX_LINE];
@@ -116,11 +99,9 @@ int stub_get_positions(char positions[][MAX_POSITION], int maxPos)
     return count;
 }
 
-/* -----------------------------------------------------------------------
- * stub_get_contestants
- * Fills contestants[] with records returned by the server.
+/* Fills contestants[] with records returned by the server.
  * Returns the number of contestants read, or -1 on error.
- * --------------------------------------------------------------------- */
+*/
 int stub_get_contestants(contestant_t contestants[], int maxCon)
 {
     char buf[MAX_LINE];
@@ -157,10 +138,8 @@ int stub_get_contestants(contestant_t contestants[], int maxCon)
     return count;
 }
 
-/* -----------------------------------------------------------------------
- * stub_verify_voter
- * Returns 0 = bad creds, 1 = ok/not voted, 2 = ok/already voted, -1 = error.
- * --------------------------------------------------------------------- */
+/* Returns 0 = bad creds, 1 = ok/not voted, 2 = ok/already voted, -1 = error.
+*/
 int stub_verify_voter(const char *regNo, const char *password)
 {
     char msg[MAX_MSG];
@@ -171,12 +150,10 @@ int stub_verify_voter(const char *regNo, const char *password)
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_cast_vote
- * choices: pipe-delimited contestant regNos, one per position slot,
+/* choices: pipe-delimited contestant regNos, one per position slot,
  *          empty slot = skip that position (e.g. "REG001||REG007").
  * Returns 1 on success, 0 on failure, -1 on error.
- * --------------------------------------------------------------------- */
+*/
 int stub_cast_vote(const char *regNo, const char *password,
                           const char *choices)
 {
@@ -188,12 +165,10 @@ int stub_cast_vote(const char *regNo, const char *password,
     return atoi(buf);
 }
 
-/* -----------------------------------------------------------------------
- * stub_tally_votes
- * Receives and prints results directly.
+/* Receives and prints results directly.
  * Server sends: "COUNTS\n" lines... "WINNERS\n" lines... "END\n"
  * Returns 0 on success, -1 on error.
- * --------------------------------------------------------------------- */
+*/
 int stub_tally_votes(void)
 {
     char buf[MAX_LINE];

@@ -1,13 +1,5 @@
 /*
- * evoting_common.h
- *
- * Shared definitions for the hand-rolled RPC evoting application.
- *
  * Transport: TCP on EVOTING_PORT.
- *
- * Wire protocol (text-based, no XDR):
- *   Every message is a newline-terminated line of pipe-delimited fields.
- *   The first field is always the procedure code (an integer).
  *
  *   Request:  "<PROC>|field1|field2|...\n"
  *   Response: "<STATUS>|field1|field2|...\n"
@@ -76,21 +68,16 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-/* -----------------------------------------------------------------------
- * Configuration
- * --------------------------------------------------------------------- */
 #define EVOTING_PORT   9876
 #define MAX_NAME       50
 #define MAX_REGNO      20
 #define MAX_PASSWORD   20
 #define MAX_POSITION   30
 #define MAX_RECORDS    100
-#define MAX_LINE       256   /* longest single wire line                  */
-#define MAX_MSG        4096  /* largest single outbound message           */
+#define MAX_LINE       256   
+#define MAX_MSG        4096 
 
-/* -----------------------------------------------------------------------
- * Procedure codes
- * --------------------------------------------------------------------- */
+// Procedure codes
 #define PROC_ADMIN_EXISTS        1
 #define PROC_CREATE_ADMIN        2
 #define PROC_VERIFY_ADMIN        3
@@ -103,9 +90,7 @@
 #define PROC_CAST_VOTE          10
 #define PROC_TALLY_VOTES        11
 
-/* -----------------------------------------------------------------------
- * Shared data structures (used on both sides)
- * --------------------------------------------------------------------- */
+// Shared data structures
 typedef struct {
     char name[MAX_NAME];
     char regNo[MAX_REGNO];
